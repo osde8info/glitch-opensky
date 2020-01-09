@@ -1,0 +1,27 @@
+{
+  "name": "osde8info-opensky",
+  "version": "0.0.1",
+  "description": "osde8info-opensky",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "axios": "^0.19.1"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/osde8info-opensky"
+  },
+  "license": "GNU V3",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "opensky-network"
+  ]
+}
