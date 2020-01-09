@@ -1,0 +1,19 @@
+html
+  head
+    title opensky
+    link(href="styles.css" rel="stylesheet")
+  body
+    a(href="https://opensky-network.org") opensky-network.org
+    
+    p=date
+    
+    p ARRIVALS
+    pre=arrivals
+    
+    p DEPARTURES
+    pre=departures
+    
+    //include the Glitch button to show what the webpage is about and to make it easier for folks to view source and remix
+    div(class="glitchButton", style="position:fixed;top:20px;right:20px;")
+    script(src="https://button.glitch.me/button.js")
+    
