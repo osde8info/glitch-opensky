@@ -8,6 +8,9 @@ const app = express();
 
 app.locals.pretty = true;
 
+// http://expressjs.com/en/starter/static-files.html
+app.use(express.static("public"));
+
 app.set("view engine", "pug");
 
 app.get("/", async (_, res) => {
