@@ -1,70 +1,62 @@
 const express = require("express");
 const axios = require("axios");
 
+const url = "https://opensky-network.org/api/flights/";
 const airport = process.env.AIRPORT; // EGLL
 
 const app = express();
 
 app.locals.pretty = true;
 
-app.set("view engine", "pug")
+app.set("view engine", "pug");
 
 app.get("/", async (_, res) => {
-  const flights = await getFlights()
-  res.render("index", flights)
+  const flights = await getFlights();
+  res.render("index", flights);
 });
 
+async function getflightsdetails(url, params) {
+  var response = await axios.get(url, { params });
+  console.log(response.status);
+  var flights = response.data;
+
+  var s = "";
+  if (flights) {
+    flights.forEach(flight => {
+      var details = [
+        flight.callsign,
+        flight.estDepartureAirport,
+        flight.estArrivalAirport,
+        flight.estArrivalAirportHorizDistance,
+        flight.estArrivalAirportVertDistance
+      ];
+      s = s + details.join(" ") + "\n";
+    });
+  }
+
+  return s;
+}
+
 async function getFlights() {
-  let flights = {
+  let flightinfo = {
     date: "",
     arrivals: "",
     departures: ""
   };
 
   var start = new Date();
-  flights.date = start;
-  var start = Math.floor(start / 1000) - 200000;
-  var end = start + 300;
+  flightinfo.date = start;
+  var start = Math.floor(start / 1000) - 100000;
+  var end = start + 10*60; // N min window
 
   try {
-    const url = "https://opensky-network.org/api/flights/";
-
     var params = { airport: airport, begin: start, end: end };
-    var response = await axios.get(url + "arrival", { params });
-    console.log(response.status);
-
-    var data = response.data;
-    var s = "";
-
-    for (let i = 0; i < data.length; i++) {
-      s = s + data[i].callsign + " ";
-      s = s + data[i].estDepartureAirport + " ";
-      s = s + data[i].estArrivalAirport + " ";
-      s = s + data[i].estArrivalAirportHorizDistance + " ";
-      s = s + data[i].estArrivalAirportVertDistance + " ";
-      s = s + "\n";
-    }
-
-    flights.arrivals = s;
+    flightinfo.arrivals = await getflightsdetails(url + "arrival", params);
 
     params = { airport: airport, begin: start, end: end };
-    var response = await axios.get(url + "departure", { params });
-    console.log(response.status);
+    flightinfo.departures = await getflightsdetails(url + "departure", params);
 
-    var data = response.data;
-    var s = "";
-
-    for (let i = 0; i < data.length; i++) {
-      s = s + data[i].callsign + " ";
-      s = s + data[i].estDepartureAirport + " ";
-      s = s + data[i].estArrivalAirport + " ";
-      s = s + data[i].estArrivalAirportHorizDistance + " ";
-      s = s + data[i].estArrivalAirportVertDistance + "\n";
-    }
-
-    flights.departures = s;
-
-    return flights;
+    return flightinfo;
   } catch (error) {
     console.log(error);
   }
