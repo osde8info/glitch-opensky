@@ -1,7 +1,7 @@
 html
   head
     title opensky
-    link(href="styles.css" rel="stylesheet")
+    link(href="dynamic/dyncss.css" rel="stylesheet")
   body
     p opensky aircraft landing and leaving
     a(href="https://opensky-network.org") opensky-network.org
@@ -14,8 +14,8 @@ html
     p DEPARTURES
     pre=departures
     
-    canvas(id="canvas" width="600" height="200")
-    script(src="client.js")
+    canvas(id="canvas" width="600" height="300")
+    script(src="dynamic/dynjs.js")
     
     //include the Glitch button to show what the webpage is about
     div(class="glitchButton", style="position:fixed;top:20px;right:20px;")

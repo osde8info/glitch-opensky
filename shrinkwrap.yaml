@@ -1,6 +1,7 @@
 dependencies:
   axios: 0.19.1
   express: 4.17.1
+  node-fs: 0.1.7
   pug: 2.0.4
 packages:
   /@types/babel-types/7.0.7:
@@ -482,6 +483,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
+  /node-fs/0.1.7:
+    dev: false
+    engines:
+      node: '>=0.1.97'
+    resolution:
+      integrity: sha1-MjI8zLRsn78PwRgS1FAhzDHTJbs=
   /object-assign/4.1.1:
     dev: false
     engines:
@@ -826,4 +833,5 @@ shrinkwrapVersion: 3
 specifiers:
   axios: ^0.19.1
   express: ^4.17.1
+  node-fs: ^0.1.7
   pug: ^2.0.4
