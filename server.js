@@ -17,7 +17,6 @@ app.get("/", async (_, res) => {
 
 async function getflightsdetails(url, params) {
   var response = await axios.get(url, { params });
-  console.log(response.status);
   var flights = response.data;
 
   var s = "";
@@ -25,10 +24,12 @@ async function getflightsdetails(url, params) {
     flights.forEach(flight => {
       var details = [
         flight.callsign,
-        flight.estDepartureAirport,
-        flight.estArrivalAirport,
-        flight.estArrivalAirportHorizDistance,
-        flight.estArrivalAirportVertDistance
+        flight.estDepartureAirport ? flight.estDepartureAirport : "null",
+        flight.estArrivalAirport ? flight.estArrivalAirport : "null",
+        Math.floor(flight.estArrivalAirportHorizDistance / 100),
+        Math.floor(flight.estArrivalAirportVertDistance / 10),
+        new Date(flight.firstSeen * 1000).toLocaleTimeString("en-GB"),
+        new Date(flight.lastSeen * 1000).toLocaleTimeString("en-GB"),
       ];
       s = s + details.join(" ") + "\n";
     });
@@ -45,9 +46,16 @@ async function getFlights() {
   };
 
   var start = new Date();
-  flightinfo.date = start;
+
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  };
+  flightinfo.date = start.toLocaleDateString("en-GB", options);
   var start = Math.floor(start / 1000) - 100000;
-  var end = start + 10*60; // N min window
+  var end = start + 10 * 60; // N min window
 
   try {
     var params = { airport: airport, begin: start, end: end };
