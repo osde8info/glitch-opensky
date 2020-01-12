@@ -1,9 +1,17 @@
 html
   head
-    title opensky
+    title osde8info opensky
     link(href="dynamic/dyncss.css" rel="stylesheet")
+    // ++ Google Tag Manager Head
+    script(src='dynamic/js/gtaghead.js')
+    // -- Google Tag Manager Head
+    script(src='dragdrop.js')
   body
-    p opensky aircraft landing and leaving
+    // ++ Google Tag Manager Body
+    noscript
+      iframe(src=mygtmurl height="0" width="0" style="display:none;visibility:hidden")
+    // -- Google Tag Manager Body
+    p osde8info opensky aircraft landing and leaving
     a(href="https://opensky-network.org") opensky-network.org
     
     p=date
