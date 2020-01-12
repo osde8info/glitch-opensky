@@ -1,8 +1,17 @@
 html
   head
-    title opensky
-    link(href="styles.css" rel="stylesheet")
+    title osde8info opensky
+    link(href="dynamic/dyncss.css" rel="stylesheet")
+    // ++ Google Tag Manager Head
+    script(src='dynamic/js/gtaghead.js')
+    // -- Google Tag Manager Head
+    script(src='dragdrop.js')
   body
+    // ++ Google Tag Manager Body
+    noscript
+      iframe(src=mygtmurl height="0" width="0" style="display:none;visibility:hidden")
+    // -- Google Tag Manager Body
+    p osde8info opensky aircraft landing and leaving
     a(href="https://opensky-network.org") opensky-network.org
     
     p=date
@@ -13,7 +22,10 @@ html
     p DEPARTURES
     pre=departures
     
-    //include the Glitch button to show what the webpage is about and to make it easier for folks to view source and remix
+    canvas(id="canvas" width="600" height="300")
+    script(src="dynamic/dynjs.js")
+    
+    //include the Glitch button to show what the webpage is about
     div(class="glitchButton", style="position:fixed;top:20px;right:20px;")
     script(src="https://button.glitch.me/button.js")
     
