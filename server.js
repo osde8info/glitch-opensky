@@ -1,20 +1,19 @@
 const fs = require('node-fs')
 const express = require('express')
+const app = express()
+
 const axios = require('axios')
 
 // ++ get my google tag manager id from env
 const mygtmid = process.env.MY_GTM_ID
 const mygtmurl = 'https://www.googletagmanager.com/ns.html?id=' + mygtmid
-
-//  pugdata.mygtmurl = mygtmurl
 // -- get my google tag manager id from env
 
 const myapikey = process.env.MY_API_KEY
 const airport = process.env.MY_AIRPORT // EGLL
-
 const url = 'https://' + myapikey + 'opensky-network.org/api/flights/'
 
-const app = express()
+const ONE_DAY = 60 * 60 * 24
 
 async function getflightsdetails(url, params) {
   try {
@@ -59,7 +58,7 @@ async function getFlights() {
   }
   var start = new Date()
   flightinfo.date = start.toLocaleDateString('en-GB', options)
-  var start = Math.floor(start / 1000) - 100000
+  var start = Math.floor(start / 1000) - ONE_DAY
   var end = start + 10 * 60 // N min window
 
   var params = { airport: airport, begin: start, end: end }
@@ -117,12 +116,13 @@ app.get('/dynamic/dynjs.js', async function(req, res) {
   var planes = 'dynamic'
 
   var start = new Date()
-  var start = Math.floor(start / 1000) - 100000
+  var start = Math.floor(start / 1000) - ONE_DAY
   var end = start + 10 * 60 // N min window
 
   var s = ''
 
   var params = { airport: airport, begin: start, end: end }
+  
   var flights = await getflightsdetails(url + 'arrival', params)
   if (flights) {
     flights.forEach(flight => {
