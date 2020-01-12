@@ -1,6 +1,6 @@
 OPENSKY
 
-based on node express pug & prettier (see BADGES below)
+displays the arrivals and departures for your chosen AIRPORT based on node express pug & prettier (see BADGES below)
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
@@ -13,7 +13,6 @@ based on node express pug & prettier (see BADGES below)
   <a href="#badge">
     <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>
 
-Shows the arrivals and departures for your chosen AIRPORT from opensky-network.org
 
 https://osde8info-opensky.glitch.me/
 
